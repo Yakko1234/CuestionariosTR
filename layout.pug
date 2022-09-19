@@ -1,0 +1,34 @@
+doctype html
+html
+	head
+		title CuestionariosTR App
+		meta(charset="utf-8")
+		//-------------------------------------------------
+		// Latest compiled and minified CSS of Bootstrap
+		//-------------------------------------------------
+		link(rel="stylesheet" href="/public/css/bootstrap.min.css")
+
+		//-------------------------------------------------
+		// Latest Jquery
+		//-------------------------------------------------
+		script(src="/public/js/jquery-2.2.4.js")
+		
+		//-------------------------------------------------
+		// Latest compiled and minified JavaScript of Bootstrap
+		//-------------------------------------------------
+		script(type="text/javascript" src="/public/js/bootstrap.min.js")
+
+		link(href="/public/css/app.css" rel="stylesheet")
+		script(src="/socket.io/socket.io.js")
+		script(src="/public/js/handlebars.js")
+
+	body
+		nav(class="large-padding black white-text")
+			ul
+				li 
+					a(href="/app") Inicio
+				li
+					//-a(href="/app/preguntas/new") Subir pregunta
+				li
+					a(href="/app/preguntas") Mis Preguntas
+		block contenido

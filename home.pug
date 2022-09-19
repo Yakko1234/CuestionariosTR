@@ -1,0 +1,111 @@
+extends ../layout.pug
+block contenido
+	div(class="container")
+		.white.border.tr.large-padding.titulo-tabla.text-center.mid-top-space
+			.row
+				.col-xs-4.col-sm-4.col-md-4.col-lg-4
+					p Pregunta
+				.col-xs-4.col-sm-4.col-md-4.col-lg-4
+					p Contestar
+				.col-xs-4.col-sm-4.col-md-4.col-lg-4
+					p Puntos
+		div(id="preguntas")
+			- var total = 0
+			for pregunta in preguntas
+				.white.border.tr.large-padding.text-center
+					.row
+						.col-xs-4.col-sm-4.col-md-4.col-lg-4
+							p=pregunta.pregunta
+						.col-xs-4.col-sm-4.col-md-4.col-lg-4
+							- if(typeof pregunta.pregunta_contestada[0] != "undefined")
+								p Contestada
+							- else
+								a(href="/app/contestar/" + pregunta._id)
+									p Contestar
+						.col-xs-4.col-sm-4.col-md-4.col-lg-4
+							- if(typeof pregunta.pregunta_contestada[0] != "undefined")
+								p=pregunta.pregunta_contestada[0].puntos
+								- total += pregunta.pregunta_contestada[0].puntos
+							- else
+								p='-'
+		div
+			.white.border.tr.large-padding.titulo-tabla.text-center
+					.row
+						.col-xs-4.col-sm-4.col-md-4.col-lg-4
+						.col-xs-4.col-sm-4.col-md-4.col-lg-4.text-right
+							p T O T A L
+						.col-xs-4.col-sm-4.col-md-4.col-lg-4
+							p=total
+
+		script(id="pregunta-template" type="text/x-handlebars-template")
+			.white.border.tr.large-padding.text-center
+				.row
+					.col-xs-4.col-sm-4.col-md-4.col-lg-4
+						p {{pregunta}}
+					.col-xs-4.col-sm-4.col-md-4.col-lg-4
+						a(href="/app/contestar/{{id}}")
+							p Contestar...
+					.col-xs-4.col-sm-4.col-md-4.col-lg-4
+						p {{puntos}}
+	div(id="fijo")
+		p TOTAL 
+		p #{total} pts.
+
+	script(src="/public/js/client.js")
+	//-
+		div(class="container")
+			.white.border.tr.large-padding.titulo-tabla.text-center.mid-top-space
+				.row
+					.col-xs-6.col-sm-6.col-md-4.col-lg-4
+						p Pregunta
+					.hidden-xs.hidden-sm.col-md-1.col-lg-1
+						p Opción 1
+					.hidden-xs.hidden-sm.col-md-1.col-lg-1
+						p Opción 2
+					.hidden-xs.hidden-sm.col-md-1.col-lg-1
+						p Opción 3
+					.hidden-xs.hidden-sm.col-md-1.col-lg-1
+						p Opción 4
+					.hidden-xs.hidden-sm.col-md-2.col-lg-2
+						p Autor
+					.col-xs-6.col-sm-6.col-md-2.col-lg-2
+						p Respuesta
+			div(id="preguntas")
+				for pregunta in preguntas
+					.white.border.tr.large-padding.text-center
+						.row
+							.col-xs-6.col-sm-6.col-md-4.col-lg-4
+								a(href="/app/preguntas/" + pregunta._id)
+									p=pregunta.pregunta
+							.hidden-xs.hidden-sm.col-md-1.col-lg-1
+								p=pregunta.opcion1
+							.hidden-xs.hidden-sm.col-md-1.col-lg-1
+								p=pregunta.opcion2
+							.hidden-xs.hidden-sm.col-md-1.col-lg-1
+								p=pregunta.opcion3
+							.hidden-xs.hidden-sm.col-md-1.col-lg-1
+								p=pregunta.opcion4
+							.hidden-xs.hidden-sm.col-md-2.col-lg-2
+								if(typeof pregunta.autor != "undefined")
+									p=pregunta.autor.email
+							.col-xs-6.col-sm-6.col-md-2.col-lg-2
+								p=pregunta.respuesta
+			script(id="pregunta-template" type="text/x-handlebars-template")
+				.white.border.tr.large-padding.text-center
+					.row.pregunta-container
+						.col-xs-6.col-sm-6.col-md-4.col-lg-4
+							a(href="/app/preguntas/{{id}}")
+								p {{pregunta}}
+						.hidden-xs.hidden-sm.col-md-1.col-lg-1
+							p {{opcion1}}
+						.hidden-xs.hidden-sm.col-md-1.col-lg-1
+							p {{opcion2}}
+						.hidden-xs.hidden-sm.col-md-1.col-lg-1
+							p {{opcion3}}
+						.hidden-xs.hidden-sm.col-md-1.col-lg-1
+							p {{opcion4}}
+						.hidden-xs.hidden-sm.col-md-2.col-lg-2
+							p {{email}}
+						.col-xs-6.col-sm-6.col-md-2.col-lg-2
+							p {{respuesta}}
+		script(src="/public/js/client.js")
